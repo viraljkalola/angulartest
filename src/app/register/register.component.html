@@ -1,0 +1,51 @@
+<div>
+    <span>Add Detail</span>
+    <button type="button" routerLink="/" class="back btn btn-success">Back</button><br><br>
+    <!-- form of user detail -->
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <!-- User Name -->
+        <label>User Name</label>
+        <input type="text" formControlName="name"
+            [ngClass]="{ 'is-invalid': myForm['name'].touched && myForm['name'].errors }"><br>
+        <div class="invalid-feedback errname" *ngIf="myForm['name'].touched && myForm['name'].errors?.['required']">User
+            Name is required.
+        </div>
+        <div class="invalid-feedback errminname" *ngIf="myForm['name'].touched && myForm['name'].errors?.['minlength']">
+            Min. 3 characters require.
+        </div>
+        <!-- <div class="invalid-feedback errminname" *ngIf="myForm['name'].touched && myForm['name'].errors?.['pattern']">
+            Invalid Input
+        </div> -->
+        <br>
+        <!-- Password -->
+        <label>Password</label>
+        <input type="password" formControlName="password"
+            [ngClass]="{ 'is-invalid': myForm['password'].touched && myForm['password'].errors }"><br>
+        <div class="invalid-feedback errpsw"
+            *ngIf="myForm['password'].touched && myForm['password'].errors?.['required']">Enter your password.
+        </div>
+        <div class="invalid-feedback validpsw"
+            *ngIf="myForm['password'].touched && myForm['password'].errors?.['pattern']">Enter valid pasword.
+        </div><br>
+        <!-- Email -->
+        <label>Email</label>
+        <input type="email" formControlName="email"
+            [ngClass]="{ 'is-invalid': myForm['email'].touched && myForm['email'].errors }"><br>
+        <div class="invalid-feedback erremail" *ngIf="myForm['email'].touched && myForm['email'].errors?.['required']">
+            Enter your email.
+        </div>
+        <div class="invalid-feedback erremail" *ngIf="myForm['email'].touched && myForm['email'].errors?.['pattern']">
+            Enter valid email.
+        </div><br>
+        <!-- Role -->
+        <label>Role</label>
+        <select formControlName="role" [ngClass]="{ 'is-invalid': myForm['role'].touched && myForm['role'].errors }">
+            <option value="user">user</option>
+            <option value="admin">admin</option>
+        </select><br>
+        <div class="invalid-feedback errrole" *ngIf="myForm['role'].touched && myForm['role'].errors?.['required']">Role
+            is required.
+        </div><br><br>
+        <button type="submit" class="btn btn-success" [disabled]="!userForm.valid">Add</button>
+    </form>
+</div>
